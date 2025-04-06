@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUNI - News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #0056b3;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        nav a:hover {
+            background-color: #004080;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .news-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .news-box h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .news-box p {
+            margin: 5px 0;
+        }
+        .read-more {
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+        .icon-btn {
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 18px;
+            border: none;
+            background: none;
+            position: relative;
+        }
+        .icon-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 1000;
+        }
+        .icon-btn:hover::after {
+            opacity: 1;
+        }
+        .liked, .saved {
+            color: red;
+        }
+        .like-count {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>YUNI - News</header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="saved.html">Gespeichert</a>
+        <a href="rechte.html">Rechte</a>
+        <a href="chillzone.html">Chillzone</a>
+    </nav>
+
+    <div class="container">
+        <h2>📰 Aktuelle Nachrichten</h2>
+
+        <div class="news-box" data-title="Handyverbot in Schulen">
+            <h3>📵 Handyverbot in Schulen</h3>
+            <p>In Österreich wurden Handys in Schulen komplett verboten. Erfahre, was das für dich bedeutet.</p>
+            <p class="extra hidden">Das Verbot soll den Fokus im Unterricht verbessern und Cybermobbing verhindern. Lehrer können Ausnahmen erlauben.</p>
+            <span class="read-more" onclick="toggleText(this)">↓</span>
+            <button class="icon-btn save-article" data-tooltip="Speichern" onclick="toggleSave(this, 'Handyverbot in Schulen')">🔖</button>
+            <button class="icon-btn like-article" data-tooltip="Like" onclick="toggleLike(this)">♡</button>
+            <div class="like-count">0 ❤️</div>
+        </div>
+
+        <div class="news-box" data-title="Mondfinsternis">
+            <h3>🌘 Nächste Mondfinsternis</h3>
+            <p>Die nächste totale Mondfinsternis findet am 14. März 2025 statt. Hier erfährst du, wann und wo du sie am besten sehen kannst.</p>
+            <p class="extra hidden">Sie ist in ganz Europa sichtbar. In Österreich beginnt sie gegen 03:45 Uhr und dauert rund 1 Stunde.</p>
+            <span class="read-more" onclick="toggleText(this)">↓</span>
+            <button class="icon-btn save-article" data-tooltip="Speichern" onclick="toggleSave(this, 'Mondfinsternis')">🔖</button>
+            <button class="icon-btn like-article" data-tooltip="Like" onclick="toggleLike(this)">♡</button>
+            <div class="like-count">0 ❤️</div>
+        </div>
+
+        <div class="news-box" data-title="Jugendschutzgesetz ab Juni">
+            <h3>📜 Neues Jugendschutzgesetz ab 1. Juni</h3>
+            <p>Ab dem 1. Juni tritt ein neues Gesetz in Kraft. Es betrifft unter anderem Ausgehzeiten und Alkoholregeln für Jugendliche.</p>
+            <p class="extra hidden">Mehr Infos folgen nach Inkrafttreten. Ziel ist es, besseren Schutz für Jugendliche zu gewährleisten.</p>
+            <span class="read-more" onclick="toggleText(this)">↓</span>
+            <button class="icon-btn save-article" data-tooltip="Speichern" onclick="toggleSave(this, 'Jugendschutzgesetz ab Juni')">🔖</button>
+            <button class="icon-btn like-article" data-tooltip="Like" onclick="toggleLike(this)">♡</button>
+            <div class="like-count">0 ❤️</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleText(el) {
+            const extra = el.previousElementSibling;
+            extra.classList.toggle("hidden");
+            el.textContent = extra.classList.contains("hidden") ? "↓" : "↑";
+        }
+
+        function toggleSave(btn, title) {
+            let savedArticles = JSON.parse(localStorage.getItem("savedArticles")) || {};
+            let currentDate = new Date().toISOString().split('T')[0];
+
+            let updatedArticles = {
+                "Handyverbot in Schulen": "Handyverbot bleibt bestehen - neue Regelungen geplant.",
+                "Mondfinsternis": "Nächste Mondfinsternis am 27. September 2025 - Alle Infos!",
+                "Jugendschutzgesetz ab Juni": "Jugendschutzgesetz ist aktiv - das musst du jetzt wissen."
+            };
+
+            if (btn.classList.contains("saved")) {
+                delete savedArticles[title];
+                btn.classList.remove("saved");
+            } else {
+                savedArticles[title] = {
+                    "content": updatedArticles[title] || "Artikel gespeichert.",
+                    "savedAt": currentDate
+                };
+                btn.classList.add("saved");
+            }
+            localStorage.setItem("savedArticles", JSON.stringify(savedArticles));
+        }
+
+        function toggleLike(btn) {
+            const box = btn.closest('.news-box');
+            const title = box.getAttribute('data-title');
+            let likes = JSON.parse(localStorage.getItem('likes')) || {};
+
+            if (!likes[title]) likes[title] = 0;
+            if (btn.classList.contains("liked")) {
+                likes[title] = Math.max(0, likes[title] - 1);
+                btn.classList.remove("liked");
+                btn.textContent = "♡";
+            } else {
+                likes[title]++;
+                btn.classList.add("liked");
+                btn.textContent = "♥";
+            }
+
+            localStorage.setItem('likes', JSON.stringify(likes));
+            box.querySelector('.like-count').textContent = `${likes[title]} ❤️`;
+        }
+
+        window.onload = () => {
+            const boxes = document.querySelectorAll('.news-box');
+            const likes = JSON.parse(localStorage.getItem('likes')) || {};
+            const saved = JSON.parse(localStorage.getItem('savedArticles')) || {};
+
+            boxes.forEach(box => {
+                const title = box.getAttribute('data-title');
+                if (likes[title]) {
+                    box.querySelector('.like-count').textContent = `${likes[title]} ❤️`;
+                    const likeBtn = box.querySelector('.like-article');
+                    likeBtn.classList.add("liked");
+                    likeBtn.textContent = "♥";
+                }
+                if (saved[title]) {
+                    const saveBtn = box.querySelector('.save-article');
+                    saveBtn.classList.add("saved");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
