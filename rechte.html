@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YUNI - Rechte & Fragen</title>
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      color: #333;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #0056b3;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+    }
+    nav a:hover {
+      background-color: #004080;
+      border-radius: 5px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .headline {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h3 {
+      color: #0056b3;
+      margin-bottom: 10px;
+    }
+    .section p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .question-box {
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
+    }
+    .question-box.recht { background-color: #fff8e1; }
+    .question-box.artikel { background-color: #e1f5e1; }
+    .question-box.feedback { background-color: #e6f0ff; }
+
+    label, select, input[type="text"], textarea, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    .submitted-questions {
+      margin-top: 40px;
+    }
+    .question-card {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .question-card.recht { background-color: #fff8e1; }
+    .question-card.artikel { background-color: #e1f5e1; }
+    .question-card.feedback { background-color: #e6f0ff; }
+
+    .question-card .meta {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .question-card .actions {
+      margin-top: 10px;
+    }
+    .like-btn, .save-btn {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 20px;
+      margin-right: 10px;
+      position: relative;
+    }
+    .like-btn::after, .save-btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -25px;
+      left: 0;
+      background: #333;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+    .like-btn:hover::after, .save-btn:hover::after {
+      opacity: 1;
+    }
+    .like-btn.liked { color: red; }
+    .save-btn.saved { color: #007bff; }
+
+    .like-count {
+      display: inline-block;
+      font-size: 14px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      padding: 20px;
+      color: #777;
+    }
+    .info-link {
+      display: inline-block;
+      color: #007bff;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 28px;
+    }
+    .info-box {
+      display: none;
+      background-color: #eef;
+      border: 1px solid #aad;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>YUNI - Rechte & Deine Fragen</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="saved.html">Gespeichert</a>
+    <a href="rechte.html">Rechte</a>
+    <a href="umfragen.html">Umfragen</a>
+  </nav>
+
+  <div class="container">
+    <div class="headline">Stell uns deine Frage – <span class="info-link" onclick="toggleInfo()">anonym</span></div>
+    <div class="info-box" id="infoBox">
+      Deine Fragen sind komplett anonym. Bitte gib keine echten Namen oder persönliche Daten an. Alle Fragen werden sorgfältig geprüft.
+    </div>
+
+    <div class="question-box" id="questionBox">
+      <label for="nickname">Dein Nickname (frei wählbar):</label>
+      <input type="text" id="nickname" placeholder="z. B. Sternchen99" />
+
+      <label for="questionType">Art der Frage:</label>
+      <select id="questionType">
+        <option value="recht">Rechte & Gesetze</option>
+        <option value="artikel">Frage zu einem Artikel</option>
+        <option value="feedback">Feedback oder Empfehlungen für die Webseite</option>
+      </select>
+
+      <label for="questionText">Deine Frage:</label>
+      <textarea id="questionText" placeholder="Was möchtest du wissen oder mitteilen?"></textarea>
+
+      <button onclick="submitQuestion()">Frage abschicken</button>
+    </div>
+
+    <div class="submitted-questions">
+      <h3>Beantwortete Fragen</h3>
+      <div id="questionsList">
+        <!-- Fragen erscheinen hier -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 YUNI - Deine Stimme zählt
+  </footer>
+
+  <script>
+    const box = document.getElementById("questionBox");
+    const typeSelect = document.getElementById("questionType");
+    const questionsList = document.getElementById("questionsList");
+
+    let questions = JSON.parse(localStorage.getItem("questions") || "[]");
+
+    function renderQuestions() {
+      questionsList.innerHTML = "";
+      questions.forEach(q => {
+        const card = document.createElement("div");
+        card.className = "question-card " + q.type;
+        card.innerHTML = `
+          <div class="meta">${q.nickname} fragte zu <strong>${q.type}</strong>:</div>
+          <div class="text">${q.text}</div>
+          <div class="actions">
+            <button class="like-btn ${q.liked ? 'liked' : ''}" data-tooltip="Liken" onclick="toggleLike(this, '${q.id}')">🤍</button><span class="like-count" id="${q.id}">${q.likes}</span>
+            <button class="save-btn ${q.saved ? 'saved' : ''}" data-tooltip="Speichern" onclick="toggleSave(this, '${q.id}')">🔖</button>
+          </div>
+        `;
+        questionsList.prepend(card);
+      });
+    }
+
+    typeSelect.addEventListener("change", () => {
+      box.className = "question-box " + typeSelect.value;
+    });
+
+    function submitQuestion() {
+      const nickname = document.getElementById("nickname").value || "Anonym";
+      const type = document.getElementById("questionType").value;
+      const text = document.getElementById("questionText").value;
+
+      if (!text.trim()) return;
+
+      const id = "like-" + Date.now();
+      const newQuestion = { id, nickname, type, text, likes: 0, liked: false, saved: false };
+      questions.unshift(newQuestion);
+      localStorage.setItem("questions", JSON.stringify(questions));
+
+      renderQuestions();
+
+      document.getElementById("questionText").value = "";
+    }
+
+    function toggleLike(button, id) {
+      const question = questions.find(q => q.id === id);
+      if (!question) return;
+      question.liked = !question.liked;
+      question.likes += question.liked ? 1 : -1;
+      localStorage.setItem("questions", JSON.stringify(questions));
+      renderQuestions();
+    }
+
+    function toggleSave(button, id) {
+      const question = questions.find(q => q.id === id);
+      if (!question) return;
+      question.saved = !question.saved;
+      localStorage.setItem("questions", JSON.stringify(questions));
+      renderQuestions();
+    }
+
+    function toggleInfo() {
+      const box = document.getElementById("infoBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    renderQuestions();
+  </script>
+</body>
+</html>

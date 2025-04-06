@@ -48,6 +48,7 @@
             padding: 15px;
             margin-top: 10px;
             border-radius: 5px;
+            position: relative;
         }
         .news-box h3 {
             margin: 0;
@@ -56,15 +57,48 @@
         .news-box p {
             margin: 5px 0;
         }
-        .read-more, .save-article {
-            color: #007BFF;
-            text-decoration: none;
-            font-weight: bold;
+        .read-more {
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+        .icon-btn {
             cursor: pointer;
             margin-left: 10px;
+            font-size: 18px;
+            border: none;
+            background: none;
+            position: relative;
         }
-        .read-more:hover, .save-article:hover {
-            text-decoration: underline;
+        .icon-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 1000;
+        }
+        .icon-btn:hover::after {
+            opacity: 1;
+        }
+        .liked, .saved {
+            color: red;
+        }
+        .like-count {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 14px;
+            color: #555;
         }
         .hidden {
             display: none;
@@ -74,9 +108,9 @@
 <body>
     <header>YUNI - News</header>
     <nav>
-        <a href="saved.html">Gespeichert</a>
         <a href="index.html">Home</a>
-        <a href="News.html">News</a>
+        <a href="news.html">News</a>
+        <a href="saved.html">Gespeichert</a>
         <a href="rechte.html">Rechte</a>
         <a href="chillzone.html">Chillzone</a>
     </nav>
@@ -84,105 +118,105 @@
     <div class="container">
         <h2>📰 Aktuelle Nachrichten</h2>
 
-        <div class="news-box">
+        <div class="news-box" data-title="Handyverbot in Schulen">
             <h3>📵 Handyverbot in Schulen</h3>
             <p>In Österreich wurden Handys in Schulen komplett verboten. Erfahre, was das für dich bedeutet.</p>
             <p class="extra hidden">Das Verbot soll den Fokus im Unterricht verbessern und Cybermobbing verhindern. Lehrer können Ausnahmen erlauben.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Handyverbot in Schulen')">💾 Speichern</span>
+            <span class="read-more" onclick="toggleText(this)">↓</span>
+            <button class="icon-btn save-article" data-tooltip="Speichern" onclick="toggleSave(this, 'Handyverbot in Schulen')">🔖</button>
+            <button class="icon-btn like-article" data-tooltip="Like" onclick="toggleLike(this)">♡</button>
+            <div class="like-count">0 ❤️</div>
         </div>
 
-        <div class="news-box">
+        <div class="news-box" data-title="Mondfinsternis">
             <h3>🌘 Nächste Mondfinsternis</h3>
             <p>Die nächste totale Mondfinsternis findet am 14. März 2025 statt. Hier erfährst du, wann und wo du sie am besten sehen kannst.</p>
             <p class="extra hidden">Sie ist in ganz Europa sichtbar. In Österreich beginnt sie gegen 03:45 Uhr und dauert rund 1 Stunde.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Mondfinsternis')">💾 Speichern</span>
+            <span class="read-more" onclick="toggleText(this)">↓</span>
+            <button class="icon-btn save-article" data-tooltip="Speichern" onclick="toggleSave(this, 'Mondfinsternis')">🔖</button>
+            <button class="icon-btn like-article" data-tooltip="Like" onclick="toggleLike(this)">♡</button>
+            <div class="like-count">0 ❤️</div>
         </div>
 
-        <div class="news-box">
-            <h3>📢 Neues Jugendschutzgesetz</h3>
-            <p>Ab dem 1. Juni 2025 treten neue Jugendschutzgesetze in Kraft. Was ändert sich für dich?</p>
-            <p class="extra hidden">Neue Regelungen zu Ausgehzeiten und Alkoholkonsum gelten bundesweit einheitlich. Infos folgen!</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Jugendschutzgesetz')">💾 Speichern</span>
-        </div>
-
-        <div class="news-box">
-            <h3>🚀 Erste bemannte Marsmission geplant</h3>
-            <p>Die NASA plant für 2030 die erste bemannte Marsmission. Erfahre mehr über die neuesten Entwicklungen.</p>
-            <p class="extra hidden">Das Raumschiff soll 6 Astronauten zum Mars bringen. Start ist für Juli 2030 vorgesehen.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Marsmission')">💾 Speichern</span>
-        </div>
-
-        <div class="news-box">
-            <h3>⚽ EM 2024: Österreichs Chancen</h3>
-            <p>Die Europameisterschaft 2024 steht vor der Tür! Wie stehen die Chancen für Österreich?</p>
-            <p class="extra hidden">Österreich trifft in der Gruppenphase auf Frankreich, Polen und die Niederlande.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('EM 2024')">💾 Speichern</span>
-        </div>
-
-        <div class="news-box">
-            <h3>🌍 Klimawandel: Neue Maßnahmen</h3>
-            <p>Die EU plant strengere Maßnahmen gegen den Klimawandel. Wie betrifft das den Alltag?</p>
-            <p class="extra hidden">Neue CO₂-Grenzwerte für Autos und Förderung erneuerbarer Energien sind geplant.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Klimawandel')">💾 Speichern</span>
-        </div>
-
-        <div class="news-box">
-            <h3>🧠 Mental Health Woche in Wien</h3>
-            <p>In Wien findet eine Aktionswoche rund um mentale Gesundheit für Jugendliche statt.</p>
-            <p class="extra hidden">Workshops, Vorträge und Freizeitangebote helfen, Stress zu bewältigen und Austausch zu fördern.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Mental Health Woche')">💾 Speichern</span>
-        </div>
-
-        <div class="news-box">
-            <h3>📚 Lesewettbewerb 2025 gestartet</h3>
-            <p>Der bundesweite Lesewettbewerb ist gestartet! Jetzt mitmachen und Preise gewinnen.</p>
-            <p class="extra hidden">Teilnahme über Schulen oder Bibliotheken möglich. Einsendeschluss ist der 30. April.</p>
-            <a class="read-more" onclick="toggleText(this)">Mehr erfahren...</a>
-            <span class="save-article" onclick="saveArticle('Lesewettbewerb')">💾 Speichern</span>
+        <div class="news-box" data-title="Jugendschutzgesetz ab Juni">
+            <h3>📜 Neues Jugendschutzgesetz ab 1. Juni</h3>
+            <p>Ab dem 1. Juni tritt ein neues Gesetz in Kraft. Es betrifft unter anderem Ausgehzeiten und Alkoholregeln für Jugendliche.</p>
+            <p class="extra hidden">Mehr Infos folgen nach Inkrafttreten. Ziel ist es, besseren Schutz für Jugendliche zu gewährleisten.</p>
+            <span class="read-more" onclick="toggleText(this)">↓</span>
+            <button class="icon-btn save-article" data-tooltip="Speichern" onclick="toggleSave(this, 'Jugendschutzgesetz ab Juni')">🔖</button>
+            <button class="icon-btn like-article" data-tooltip="Like" onclick="toggleLike(this)">♡</button>
+            <div class="like-count">0 ❤️</div>
         </div>
     </div>
 
     <script>
         function toggleText(el) {
             const extra = el.previousElementSibling;
-            if (extra.classList.contains("hidden")) {
-                extra.classList.remove("hidden");
-                el.textContent = "Weniger anzeigen...";
-            } else {
-                extra.classList.add("hidden");
-                el.textContent = "Mehr erfahren...";
-            }
+            extra.classList.toggle("hidden");
+            el.textContent = extra.classList.contains("hidden") ? "↓" : "↑";
         }
 
-        function saveArticle(title) {
+        function toggleSave(btn, title) {
             let savedArticles = JSON.parse(localStorage.getItem("savedArticles")) || {};
             let currentDate = new Date().toISOString().split('T')[0];
 
             let updatedArticles = {
                 "Handyverbot in Schulen": "Handyverbot bleibt bestehen - neue Regelungen geplant.",
                 "Mondfinsternis": "Nächste Mondfinsternis am 27. September 2025 - Alle Infos!",
-                "Jugendschutzgesetz": "Neue Jugendschutzgesetze in Kraft - Das hat sich geändert.",
-                "Marsmission": "NASA gibt Startdatum für Marsmission bekannt!",
-                "EM 2024": "Österreich in der Gruppenphase – Ergebnisse und Analysen.",
-                "Klimawandel": "EU beschließt neue Klimaziele - Was du wissen musst.",
-                "Mental Health Woche": "Workshops & Events in Wien für mentale Gesundheit",
-                "Lesewettbewerb": "Finalrunde des Lesewettbewerbs – Gewinner stehen fest!"
+                "Jugendschutzgesetz ab Juni": "Jugendschutzgesetz ist aktiv - das musst du jetzt wissen."
             };
 
-            savedArticles[title] = {
-                "content": updatedArticles[title],
-                "savedAt": currentDate
-            };
-
+            if (btn.classList.contains("saved")) {
+                delete savedArticles[title];
+                btn.classList.remove("saved");
+            } else {
+                savedArticles[title] = {
+                    "content": updatedArticles[title] || "Artikel gespeichert.",
+                    "savedAt": currentDate
+                };
+                btn.classList.add("saved");
+            }
             localStorage.setItem("savedArticles", JSON.stringify(savedArticles));
-            alert("Artikel gespeichert!");
+        }
+
+        function toggleLike(btn) {
+            const box = btn.closest('.news-box');
+            const title = box.getAttribute('data-title');
+            let likes = JSON.parse(localStorage.getItem('likes')) || {};
+
+            if (!likes[title]) likes[title] = 0;
+            if (btn.classList.contains("liked")) {
+                likes[title] = Math.max(0, likes[title] - 1);
+                btn.classList.remove("liked");
+                btn.textContent = "♡";
+            } else {
+                likes[title]++;
+                btn.classList.add("liked");
+                btn.textContent = "♥";
+            }
+
+            localStorage.setItem('likes', JSON.stringify(likes));
+            box.querySelector('.like-count').textContent = `${likes[title]} ❤️`;
+        }
+
+        window.onload = () => {
+            const boxes = document.querySelectorAll('.news-box');
+            const likes = JSON.parse(localStorage.getItem('likes')) || {};
+            const saved = JSON.parse(localStorage.getItem('savedArticles')) || {};
+
+            boxes.forEach(box => {
+                const title = box.getAttribute('data-title');
+                if (likes[title]) {
+                    box.querySelector('.like-count').textContent = `${likes[title]} ❤️`;
+                    const likeBtn = box.querySelector('.like-article');
+                    likeBtn.classList.add("liked");
+                    likeBtn.textContent = "♥";
+                }
+                if (saved[title]) {
+                    const saveBtn = box.querySelector('.save-article');
+                    saveBtn.classList.add("saved");
+                }
+            });
         }
     </script>
 </body>

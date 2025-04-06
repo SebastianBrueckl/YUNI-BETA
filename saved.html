@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YUNI - Gespeichert</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      color: #333;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #0056b3;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+    }
+    nav a:hover {
+      background-color: #004080;
+      border-radius: 5px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .headline {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #007BFF;
+    }
+    .saved-item {
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 5px solid #007BFF;
+      background-color: #e3f2fd;
+      border-radius: 5px;
+    }
+    .saved-item h3 {
+      margin: 0 0 10px;
+    }
+    .saved-item p {
+      margin: 0;
+    }
+    footer {
+      text-align: center;
+      font-size: 14px;
+      padding: 20px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>YUNI - Gespeichert</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="saved.html">Gespeichert</a>
+    <a href="rechte.html">Rechte</a>
+    <a href="umfragen.html">Umfragen</a>
+  </nav>
+
+  <div class="container">
+    <div class="headline">🧠 Deine gespeicherten Inhalte</div>
+    <div id="savedContent">Noch nichts gespeichert.</div>
+  </div>
+
+  <footer>
+    &copy; 2025 YUNI - Von Jugendlichen für Jugendliche
+  </footer>
+
+  <script>
+    window.onload = () => {
+      const savedArticles = JSON.parse(localStorage.getItem("savedArticles") || "[]");
+      const savedQuestions = JSON.parse(localStorage.getItem("savedQuestions") || "[]");
+      const container = document.getElementById("savedContent");
+      container.innerHTML = '';
+
+      if (savedArticles.length === 0 && savedQuestions.length === 0) {
+        container.textContent = "Noch nichts gespeichert.";
+        return;
+      }
+
+      savedArticles.forEach(article => {
+        const item = document.createElement("div");
+        item.className = "saved-item";
+        item.innerHTML = `<h3>${article.title}</h3><p>${article.text}</p>`;
+        container.appendChild(item);
+      });
+
+      savedQuestions.forEach(q => {
+        const item = document.createElement("div");
+        item.className = "saved-item";
+        item.innerHTML = `<h3>🗣️ ${q.nickname}</h3><p>${q.text}</p>`;
+        container.appendChild(item);
+      });
+    }
+  </script>
+</body>
+</html>
