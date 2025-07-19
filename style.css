@@ -1,0 +1,344 @@
+:root {
+  --yuni-blue: #4a90e2;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  transition: background-color 0.3s, color 0.3s;
+  padding-bottom: 60px;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #eee;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background-color: var(--yuni-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+header img.settings-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+header .greeting {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+header .profile {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header .profile img.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+/* Profil-Popup */
+#profileMenu {
+  display: none;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background-color: var(--yuni-blue);
+  color: white;
+  border-radius: 8px;
+  min-width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 200;
+  user-select: none;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+#profileMenu input[type="text"] {
+  width: 90%;
+  margin: 10px 5%;
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+}
+
+#profileMenu button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  transition: background-color 0.2s;
+}
+
+#profileMenu button:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Hauptbereich */
+main {
+  padding: 60px 15px 20px 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.block {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark main .block {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+/* Untere Menüleiste */
+nav.bottom-nav {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 56px;
+  border: 2px solid var(--yuni-blue);
+  transition: background-color 0.3s, border-color 0.3s;
+  z-index: 150;
+}
+
+body.dark nav.bottom-nav {
+  background-color: #222;
+  border-color: var(--yuni-blue);
+}
+
+nav.bottom-nav img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  filter: brightness(0) saturate(100%) invert(29%) sepia(91%) saturate(676%) hue-rotate(188deg) brightness(96%) contrast(90%);
+  transition: filter 0.3s;
+}
+
+nav.bottom-nav img.active {
+  filter: drop-shadow(0 0 4px var(--yuni-blue));
+}
+
+#profileMenu.show {
+  display: block;
+}
+
+/* Optional: Darkmode-Schalter im Hauptbereich */
+main label {
+  font-size: 16px;
+}
+.colored-heading {
+  color: var(--yuni-blue);
+  transition: color 0.3s ease;
+}
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.color-options button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-options button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+/* Suchfeld im Header */
+#searchContainer {
+  position: absolute;
+  top: 12px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: width 0.4s ease, opacity 0.4s ease;
+  width: 32px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-color: white;
+  cursor: pointer;
+}
+
+#searchContainer.expanded {
+  width: 220px;
+  cursor: auto;
+  border-color: var(--yuni-blue);
+  box-shadow: 0 0 8px var(--yuni-blue);
+}
+
+#searchIcon {
+  width: 24px;
+  height: 24px;
+  filter: invert(29%) sepia(91%) saturate(676%) hue-rotate(188deg) brightness(96%) contrast(90%);
+  cursor: pointer;
+}
+
+#searchInput {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 6px 8px;
+  background: transparent;
+  display: none;
+}
+
+#searchContainer.expanded #searchInput {
+  display: block;
+}
+
+/* Hauptbereich - Vollbild Scroll für Artikel */
+#articlesContainer {
+  margin-top: 60px; /* unter Header */
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  padding-right: 80px; /* Platz für Sidebar */
+}
+
+.article {
+  scroll-snap-align: start;
+  height: 100vh;
+  padding: 24px 20px 20px 20px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 12px;
+  margin: 12px 12px 20px 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #222;
+  transition: background-color 0.3s;
+}
+
+body.dark #articlesContainer .article {
+  background-color: #1e1e1e;
+  color: #eee;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.8);
+}
+
+.article h2 {
+  margin-top: 0;
+  color: var(--yuni-blue);
+}
+
+.article img.article-image {
+  max-width: 100%;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+/* Rechte Sidebar */
+#rightSidebar {
+  position: fixed;
+  top: 80px; /* unter Header */
+  right: 10px;
+  width: 56px;
+  background-color: white;
+  border-radius: 30px;
+  border: 2px solid var(--yuni-blue);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  z-index: 300;
+  user-select: none;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+body.dark #rightSidebar {
+  background-color: #222;
+  border-color: var(--yuni-blue);
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover,
+.action-btn:focus {
+  background-color: var(--yuni-blue);
+  filter: brightness(1.1);
+}
+
+.action-btn img {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+/* Trenner zwischen Buttons */
+.nav-separator {
+  width: 80%;
+  height: 1px;
+  background-color: var(--yuni-blue);
+  opacity: 0.3;
+  margin: 6px 0;
+}

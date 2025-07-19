@@ -1,0 +1,188 @@
+/* login.css */
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  max-width: 90vw;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+label {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.25rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 0.7rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #3a86ff; /* picked color */
+  outline: none;
+  box-shadow: 0 0 5px rgba(58, 134, 255, 0.5);
+}
+
+button {
+  padding: 0.8rem;
+  background-color: #3a86ff; /* picked color */
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.25s ease;
+}
+
+button:hover {
+  background-color: #265ecf;
+}
+
+p.switch-form {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+p.switch-form a {
+  color: #3a86ff;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+p.switch-form a:hover {
+  color: #265ecf;
+}
+
+/* Versteckt Form */
+.hidden {
+  display: none;
+}
+/* login.css */
+/* ... dein bisheriger Code ... */
+
+body {
+  background-color: var(--picked-color, #4a90e2);
+  /* ... */
+}
+
+.login-container button {
+  background-color: var(--picked-color, #4a90e2);
+  /* ... */
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container input[type="file"] {
+  border: 1.8px solid var(--picked-color, #4a90e2);
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus,
+.login-container input[type="file"]:focus {
+  border-color: var(--picked-color, #4a90e2);
+  box-shadow: 0 0 8px var(--picked-color, #4a90e2);
+}
+
+.toggle-link {
+  color: var(--picked-color, #4a90e2);
+}
+
+.login-container button:hover {
+  filter: brightness(85%);
+}
+.login-container button {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: var(--picked-color);
+  filter: brightness(0.9);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+/* login.css */
+/* ... dein bisheriger Code ... */
+
+body {
+  background-color: var(--picked-color, #4a90e2);
+  /* ... */
+}
+
+.login-container button {
+  background-color: var(--picked-color, #4a90e2);
+  /* ... */
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container input[type="file"] {
+  border: 1.8px solid var(--picked-color, #4a90e2);
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus,
+.login-container input[type="file"]:focus {
+  border-color: var(--picked-color, #4a90e2);
+  box-shadow: 0 0 8px var(--picked-color, #4a90e2);
+}
+
+.toggle-link {
+  color: var(--picked-color, #4a90e2);
+}
+
+.login-container button:hover {
+  filter: brightness(85%);
+}
+.login-container button {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: var(--picked-color);
+  filter: brightness(0.9);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}

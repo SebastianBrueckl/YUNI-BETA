@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YUNI – For You</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="icons/settings-icon-blue.png" alt="Einstellungen" class="settings-icon" title="Einstellungen" onclick="window.location.href='settings.html'">
+    <div class="greeting">Hallo, <span id="usernameDisplay">Gast</span></div>
+    <div class="profile" id="profileToggle" tabindex="0" aria-label="Profil Menü öffnen">
+      <img src="icons/avatar-default.png" alt="Profil" class="avatar" />
+    </div>
+    <div id="profileMenu" role="menu" aria-hidden="true">
+      <input type="text" id="usernameInput" placeholder="Benutzername ändern" autocomplete="off" />
+      <button onclick="window.location.href='profile.html'">Profil</button>
+      <button onclick="window.location.href='settings.html'">Einstellungen</button>
+      <button onclick="window.location.href='privacy.html'">Privatsphäre</button>
+      <button onclick="alert('Danke für dein Feedback!')">YUNI bewerten</button>
+      <button onclick="window.location.href='about-yuni.html'">Über YUNI</button>
+      <button onclick="logout()">Abmelden</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="block">
+      <h2 class="colored-heading">Am meisten gelikter Artikel</h2>
+      <p>Hier erscheint der Artikel mit den meisten Likes.</p>
+    </div>
+    <div class="block">
+      <h2 class="colored-heading">Abonnierte Artikel (neu)</h2>
+      <p>Neueste Artikel deiner Abos werden hier angezeigt.</p>
+    </div>
+    <div class="block">
+      <h2 class="colored-heading">Meistbeantwortete Umfrage</h2>
+      <p>Die Umfrage mit den meisten Antworten wird hier angezeigt.</p>
+    </div>
+    <div class="block">
+      <h2 class="colored-heading">Top Werbung</h2>
+      <p>Die Werbung mit den höchsten Klickzahlen / Einnahmen.</p>
+    </div>
+
+    <!-- 🔥 Dynamischer Artikelbereich -->
+    <section id="articlesContainer" class="block">
+      <h2 class="colored-heading">Empfohlene Artikel</h2>
+      <p>Hier werden Artikel geladen ...</p>
+    </section>
+
+    <!-- Dark Mode Toggle -->
+    <div style="text-align:center; margin-top: 30px;">
+      <label>
+        <input type="checkbox" id="darkModeToggleMain" /> Darkmode aktivieren
+      </label>
+    </div>
+  </main>
+
+  <nav class="bottom-nav" role="navigation" aria-label="Hauptnavigation">
+    <img id="nav-home" src="icons/index-icon-blue.png" alt="Home" title="Home" onclick="window.location.href='for-you.html'" />
+    <img id="nav-texts" src="icons/texts-icon-blue.png" alt="Texte" title="Texte" onclick="window.location.href='texts.html'" />
+    <img id="nav-useractions" src="icons/heart-icon-blue.png" alt="Aktionen" title="Aktionen" />
+    <img id="nav-questions" src="icons/question-icon-blue.png" alt="Fragen" title="Fragen" onclick="window.location.href='questions.html'" />
+    <img id="nav-profile" src="icons/avatar-default.png" alt="Profil" title="Profil" />
+    <img id="nav-settings" src="icons/settings-icon-blue.png" alt="Einstellungen" title="Einstellungen" onclick="window.location.href='settings.html'" />
+  </nav>
+</body>
+</html>

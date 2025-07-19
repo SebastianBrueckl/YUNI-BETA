@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Über YUNI</title>
+<link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="icons/settings-icon-blue.png" alt="Einstellungen" class="settings-icon" title="Einstellungen" onclick="window.location.href='settings.html'">
+    <div class="greeting">Hallo, <span id="usernameDisplay">Gast</span></div>
+    <div class="profile" id="profileToggle" tabindex="0" aria-label="Profil Menü öffnen">
+      <img src="icons/avatar-default.png" alt="Profil" class="avatar" />
+    </div>
+    <div id="profileMenu" role="menu" aria-hidden="true">
+      <input type="text" id="usernameInput" placeholder="Benutzername ändern" autocomplete="off" />
+      <button onclick="window.location.href='profile.html'">Profil</button>
+      <button onclick="window.location.href='settings.html'">Einstellungen</button>
+      <button onclick="window.location.href='privacy.html'">Privatsphäre</button>
+      <button onclick="alert('Danke für dein Feedback!')">YUNI bewerten</button>
+      <button onclick="window.location.href='about-yuni.html'">Über YUNI</button>
+      <button onclick="logout()">Abmelden</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="block">
+      <h1 class="colored-heading">Über YUNI</h1>
+      <p>YUNI ist eine innovative Plattform, die Dir personalisierte Inhalte, Artikel und Umfragen bietet. Wir möchten Dir die besten Informationen und Unterhaltung liefern – maßgeschneidert für Dich.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="colored-heading">Unsere Mission</h2>
+      <p>Wir glauben daran, dass individuelle Erfahrungen im digitalen Raum wichtig sind. YUNI möchte Dir die Möglichkeit geben, aktiv mitzugestalten und Deine Interessen zu verfolgen.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="colored-heading">Kontakt & Feedback</h2>
+      <p>Dein Feedback ist uns wichtig! Nutze die Feedback-Schaltfläche im Profilmenü, um uns Deine Meinung mitzuteilen. Gemeinsam machen wir YUNI besser.</p>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" role="navigation" aria-label="Hauptnavigation">
+    <img id="nav-home" src="icons/index-icon-blue.png" alt="Home" title="Home" onclick="window.location.href='index.html'" />
+    <img id="nav-texts" src="icons/texts-icon-blue.png" alt="Texte" title="Texte" onclick="window.location.href='texts.html'" />
+    <img id="nav-useractions" src="icons/heart-icon-blue.png" alt="Aktionen" title="Aktionen" />
+    <img id="nav-questions" src="icons/question-icon-blue.png" alt="Fragen" title="Fragen" onclick="window.location.href='questions.html'" />
+    <img id="nav-profile" src="icons/avatar-default.png" alt="Profil" title="Profil" />
+    <img id="nav-settings" src="icons/settings-icon-blue.png" alt="Einstellungen" title="Einstellungen" onclick="window.location.href='settings.html'" />
+  </nav>
+</body>
+</html>

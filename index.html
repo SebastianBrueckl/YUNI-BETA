@@ -2,151 +2,42 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YUNI - Home</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f2f5;
-      color: #333;
-    }
-    header {
-      background-color: #007BFF;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #0056b3;
-      padding: 10px;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-    }
-    nav a:hover {
-      background-color: #004080;
-      border-radius: 5px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .headline {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #007BFF;
-    }
-    .welcome {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .feature-box {
-      background-color: #e3f2fd;
-      border-left: 5px solid #007BFF;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-    }
-    .feature-box h3 {
-      margin: 0 0 10px;
-    }
-    .top-liked {
-      background-color: #fff3cd;
-      border-left: 5px solid #ffc107;
-    }
-    .top-question {
-      background-color: #e1f5fe;
-      border-left: 5px solid #00acc1;
-    }
-    footer {
-      text-align: center;
-      font-size: 14px;
-      padding: 20px;
-      color: #777;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yuni – Login & Registrierung</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/login.css" />
 </head>
 <body>
-  <header>YUNI - Deine Jugendplattform</header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="news.html">News</a>
-    <a href="saved.html">Gespeichert</a>
-    <a href="rechte.html">Rechte</a>
-    <a href="umfragen.html">Umfragen</a>
-  </nav>
+  <h1>Willkommen bei Yuni</h1>
 
-  <div class="container">
-    <div class="headline">Willkommen bei YUNI!</div>
-    <div class="welcome">
-      YUNI ist dein digitaler Ort, um Neues zu entdecken, deine Rechte zu verstehen, dich zu entspannen und mit anderen zu vernetzen.
-    </div>
+  <!-- Login Formular -->
+  <form id="loginForm">
+    <h2>Login</h2>
+    <input type="text" id="loginAlias" placeholder="Alias" required />
+    <input type="password" id="loginPassword" placeholder="Passwort" required />
+    <button type="submit">Login</button>
+    <p><a href="#" id="showRegister">Noch keinen Account?</a></p>
+  </form>
 
-    <div class="feature-box">
-      <h3>📢 Aktuelle Themen</h3>
-      <p>Finde spannende Nachrichten, die dich betreffen – von Schulregelungen bis hin zu Weltall-Events!</p>
-      <a href="news.html">Jetzt entdecken</a>
-    </div>
+  <!-- Registrierung Formular -->
+  <form id="registerForm" class="hidden">
+    <h2>Registrieren</h2>
+    <input type="text" id="regAlias" placeholder="Alias" required />
+    <input type="password" id="regPassword" placeholder="Passwort" required />
+    <input type="file" id="regAvatar" accept="image/png, image/jpeg" />
+    <button type="submit">Registrieren</button>
+    <p><a href="#" id="showLogin">Schon registriert?</a></p>
+  </form>
 
-    <div class="feature-box top-liked">
-      <h3>❤️ Beliebtester Artikel</h3>
-      <p id="top-article">Wird geladen...</p>
-    </div>
+  <div id="message"></div>
 
-    <div class="feature-box top-question">
-      <h3>🗣️ Beliebteste Frage</h3>
-      <p id="top-question">Wird geladen...</p>
-    </div>
+  <!-- Firebase SDKs (für Hosting von CDN) -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js"></script>
 
-    <div class="feature-box">
-      <h3>🎓 Rechte & Fragen</h3>
-      <p>Stell anonym deine Fragen zu Rechten, Artikeln oder gib Feedback zur Webseite!</p>
-      <a href="rechte.html">Frage stellen</a>
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 YUNI - Von Jugendlichen für Jugendliche
-  </footer>
-
-  <script>
-    window.onload = () => {
-      const likes = JSON.parse(localStorage.getItem('likes')) || {};
-      let topArticle = 'Noch keine Likes vorhanden.';
-      let maxLikes = 0;
-
-      for (const [title, count] of Object.entries(likes)) {
-        if (count > maxLikes) {
-          maxLikes = count;
-          topArticle = `${title} (${count} ❤️)`;
-        }
-      }
-      document.getElementById("top-article").textContent = topArticle;
-
-      const questions = JSON.parse(localStorage.getItem("questions") || "[]");
-      let topQuestion = 'Noch keine Fragen vorhanden.';
-      let maxQ = 0;
-      for (const q of questions) {
-        if (q.likes > maxQ) {
-          maxQ = q.likes;
-          topQuestion = `${q.text} (${q.likes} ❤️)`;
-        }
-      }
-      document.getElementById("top-question").textContent = topQuestion;
-    }
-  </script>
+  <!-- Eigene JS-Dateien -->
+  <script type="module" src="./js/firebase.js"></script>
+  <script type="module" src="./js/auth.js"></script>
 </body>
 </html>

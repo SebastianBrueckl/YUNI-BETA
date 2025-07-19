@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YUNI – Texte</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="icons/settings-icon-blue.png" alt="Einstellungen" class="settings-icon" title="Einstellungen" onclick="window.location.href='settings.html'">
+    <div class="greeting">Hallo, <span id="usernameDisplay">Gast</span></div>
+    <div class="profile" id="profileToggle" tabindex="0" aria-label="Profil Menü öffnen">
+      <img src="icons/avatar-default.png" alt="Profil" class="avatar" />
+    </div>
+    <div id="profileMenu" role="menu" aria-hidden="true">
+      <input type="text" id="usernameInput" placeholder="Benutzername ändern" autocomplete="off" />
+      <button onclick="window.location.href='profile.html'">Profil</button>
+      <button onclick="window.location.href='settings.html'">Einstellungen</button>
+      <button onclick="window.location.href='privacy.html'">Privatsphäre</button>
+      <button onclick="alert('Danke für dein Feedback!')">YUNI bewerten</button>
+      <button onclick="window.location.href='about-yuni.html'">Über YUNI</button>
+      <button onclick="logout()">Abmelden</button>
+    </div>
+
+    <!-- Such-Icon und animiertes Suchfeld -->
+    <div id="searchContainer" aria-label="Suchfeld">
+      <img id="searchIcon" src="icons/search-icon.png" alt="Suche" title="Suche öffnen" />
+      <input type="search" id="searchInput" placeholder="Suche Artikel..." aria-label="Artikel suchen" />
+    </div>
+  </header>
+
+  <main id="articlesContainer">
+    <!-- Artikel werden hier dynamisch geladen -->
+  </main>
+
+  <!-- Rechte Aktionsleiste -->
+  <nav id="rightSidebar" aria-label="Artikelaktionen">
+    <button class="action-btn" id="likeBtn" title="Gefällt mir">
+      <img src="icons/heart-icon-blue.png" alt="Like" />
+    </button>
+    <button class="action-btn" id="subscribeBtn" title="Abonnieren">
+      <img src="icons/star-icon-blue.png" alt="Abonnieren" />
+    </button>
+    <button class="action-btn" id="saveBtn" title="Speichern">
+      <img src="icons/save-icon-blue.png" alt="Speichern" />
+    </button>
+    <button class="action-btn" id="emojiBtn" title="Reagieren">
+      <img src="icons/emoji-icon-blue.png" alt="Emoji Reaktionen" />
+    </button>
+    <button class="action-btn" id="reportBtn" title="Melden">
+      <img src="icons/report-icon-blue.png" alt="Melden" />
+    </button>
+    <div class="nav-separator"></div>
+    <button class="action-btn" id="prevArticleBtn" title="Vorheriger Artikel">
+      <img src="icons/arrow-up-icon-blue.png" alt="Nach oben" />
+    </button>
+    <button class="action-btn" id="nextArticleBtn" title="Nächster Artikel">
+      <img src="icons/arrow-down-icon-blue.png" alt="Nach unten" />
+    </button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
